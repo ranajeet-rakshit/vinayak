@@ -1,0 +1,102 @@
+<!--<style type="text/css" media="screen">
+	td, th{
+		padding: 0 !important;
+	}	
+</style>
+-->
+
+<h1>Doctors</h1>
+<button type="button" class="btn btn-primary" data-toggle='modal' data-target='#uploadDoctorModal'>Add Doctor</button>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Qualification</th>
+			<th>Designation</th>
+			<th>Contact No.</th>
+			<th>Email</th>
+			<th>Department</th>
+			<th>Image</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="doctor in doctors">
+			<td>{{doctor.fname}} {{doctor.lname}}</td>
+			<td>{{doctor.qualification}}</td>
+			<td>{{doctor.designation}}</td>
+			<td>{{doctor.contact_no}}</td>
+			<td>{{doctor.email}}</td>
+			<td>{{doctor.department}}</td>
+			<td><img ng-src="{{doctor.img_url}}"></td>
+			<td>
+				<button type="button" class="btn-xs btn-primary" ng-click="editDoctor(doctor);" data-toggle='modal' data-target='#uploadDoctorModal'>Edit</button> / 
+				<button type="button" class="btn-xs btn-danger" ng-click="showConfirm($event, doctor);">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="uploadDoctorModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal' ng-click="file=undefined;doctorToEdit='';docFirstName=undefined;docLastName=undefined;docQualification=undefined;docDesignation=undefined;docContact=undefined;docEmail=undefined;docDepartment=undefined;">&times;</button>
+				<h4 class="modal-title">Add Doctor</h4>
+			</div>
+
+			<div class="modal-body">
+				<md-input-container flex>
+					<label>First name</label>
+					<input ng-model="docFirstName">
+				</md-input-container>
+				<md-input-container flex>
+					<label>Last name</label>
+					<input ng-model="docLastName">
+				</md-input-container>
+				<md-input-container flex>
+					<label>Qualification</label>
+					<input ng-model="docQualification">
+				</md-input-container>
+				<md-input-container flex>
+					<label>Designation</label>
+					<input ng-model="docDesignation">
+				</md-input-container>
+				<md-input-container flex>
+					<label>Contact No.</label>
+					<input ng-model="docContact">
+				</md-input-container>
+				<md-input-container flex>
+					<label>Email</label>
+					<input ng-model="docEmail">
+				</md-input-container>
+				<md-input-container flex>
+				Department:
+					<select ng-model="docDepartment">
+						<option ng-repeat="department in departments" value="{{department.id}}">
+						{{department.name}}
+						</option>
+					</select>
+				</md-input-container>
+				<md-button class="md-raised" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+				accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+				ngf-resize="{width: 200, height: 100}">Click to select file </md-button>
+				<span ng-show="file">{{file.$ngfName}}</span>
+				<div ng-show="file">
+					Image thumbnail: <img ngf-thumbnail="file" width="200px" height="100px">
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-click="uploadDoctor($event);" ng-disabled="docFirstName==undefined||
+													docLastName==undefined||
+													docQualification==undefined||
+													docDesignation==undefined||
+													docContact==undefined||
+													docEmail==undefined||
+													docDepartment==undefined||!file">Submit
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

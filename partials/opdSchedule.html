@@ -1,0 +1,25 @@
+<h1>OPD Schedules</h1>
+Type in to filter by Days/Department/Doctor: 
+<input type="text" ng-model=model.id>	
+
+
+<table class="table table-responsive table-hover">
+	<thead>
+		<tr>
+			<th>Days</th>
+			<th>Time From</th>
+			<th>Time To</th>
+			<th>Department</th>
+			<th>Doctor</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="schedule in appData.opd_schedules | filter:model.id">
+			<td>{{schedule.days}}</td>
+			<td>{{schedule.time_from}}</td>
+			<td>{{schedule.time_to}}</td>
+			<td>{{schedule.department}}</td>
+			<td>{{schedule.doctor}}</td>
+		</tr>
+	</tbody>
+</table>

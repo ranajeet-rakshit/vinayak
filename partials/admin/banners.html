@@ -1,0 +1,59 @@
+<h1>Banners</h1>
+<br>
+<button type="button" class="btn btn-primary" data-toggle='modal' data-target='#uploadImgModal'>Add Banner</button>
+
+<p ng-show="progressPercentage" style="width:70%;">
+Loading data:
+<md-progress-linear md-mode="determinate" value="{{progressPercentage}}"></md-progress-linear>{{progressPercentage}}%
+</p>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Banner image</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="banner in banners">
+			<td>{{banner.id}}</td>
+			<td>{{banner.title}}</td>
+			<td>{{banner.description}}</td>
+			<td width="20%"><img ng-src="{{banner.url}}" width="100%"></td>
+			<td>
+				<button type="button" class="btn-xs btn-primary" ng-click="editImage(banner);" data-toggle="modal" data-target="#uploadImgModal">Edit</button>
+				<button type="button" class="btn-xs btn-danger" ng-click="showConfirm($event, banner);">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="uploadImgModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal' ng-click="file=undefined;imageToEdit='';imgTitle=undefined;imgDescription=undefined;">&times;</button>
+				<h4 class="modal-title">Add Banner</h4>
+			</div>
+
+			<div class="modal-body">
+				<input ng-model='imgTitle' type="text" placeholder="Enter image title">
+				<input ng-model='imgDescription' type="text" placeholder="Enter image description">
+				<md-button class="md-raised" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+				accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+				ngf-resize="{width: 700, height: 450}">Click to select file </md-button>
+				<span ng-show="file">{{file.$ngfName}}</span>
+				<div ng-show="file">
+					Image thumbnail: <img ngf-thumbnail="file" width="200px" height="100px">
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-click="uploadImageFile($event);" ng-disabled="imgTitle==undefined || imgDescription==undefined || !file">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>

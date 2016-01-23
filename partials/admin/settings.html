@@ -1,0 +1,55 @@
+<h1>Settings</h1>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Admin Email</th>
+			<th>Emergency Numbers</th>
+			<th>Last Modified</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="setting in settings">
+			<td>{{setting.id}}</td>
+			<td>{{setting.admin_email}}</td>
+			<td>{{setting.emergency_numbers}}</td>
+			<td>{{setting.last_modified}}</td>
+			<td><button type="button" class="btn-xs btn-primary" data-toggle='modal' data-target='#ediSettingtModal' ng-click="passSetting(setting);">Edit</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="ediSettingtModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal'>&times;</button>
+				<h4 class="modal-title">Edit Settings</h4>
+			</div>
+
+			<div class="modal-body">
+				<!-- Enter email: <input ng-model='adminEmail' type="email" placeholder="Email" required>
+				Enter phone number: <input ng-model='emergencyNumbers' type="tel" placeholder="Phone number" required> -->
+				<table>
+					<tbody>
+						<tr>
+							<td>Enter email: </td>
+							<td><input ng-model='adminEmail' type="email" placeholder="Email" required></td>
+						</tr>
+
+						<tr>
+							<td>Enter phone number: </td>
+							<td><input ng-model='emergencyNumbers' type="tel" placeholder="Phone number" required></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-click="editSettings();" ng-disabled="adminEmail==undefined || emergencyNumbers==undefined">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>

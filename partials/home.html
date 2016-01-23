@@ -1,0 +1,179 @@
+<script src="vinayak/app/lib/jquery.scrollbox.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		setInterval(function(){
+			$('#patient_testimonials blockquote:first').fadeOut('slow', function() {
+				$('#patient_testimonials').append($('#patient_testimonials blockquote:first'));
+				$('#patient_testimonials blockquote:last').fadeIn('slow', function() {
+					
+				});
+			});
+		}, 5000)
+
+
+		$('#marquee-vertical').marquee();
+		// $('#slider1').tinycarousel();
+		// $('#slider2').tinycarousel();
+		$('#departments').scrollbox({
+			linear: true,
+			//step: 1,
+			//switchItems:2,
+			//distance:50
+			//delay: 0,
+			speed: 50
+		});
+		$('#doctors').scrollbox({
+			direction:'h',
+			distance:50
+		});
+
+		$('#office-bearers').scrollbox({
+			direction: 'h',
+		});
+
+	});
+</script>
+
+<style type="text/css" media="screen">
+	.scroll-text{
+		height: 100%;
+		overflow: hidden;
+	}
+	.scroll-text li{
+		background-color: olive;
+		color: white;
+		height: 85px;
+		margin: 10px 10px;
+	}
+
+	#doctors{
+		width: 350px;
+		height: 300px;
+		overflow: hidden;
+	}
+	#doctors ul{
+		width: 1500px;
+		height: 150px;
+	}
+	#doctors ul li{
+		display: inline-block;
+		width: 350px;
+		height: 150px;
+	}
+	.carousel-indicators{
+		display: none;
+	}
+
+</style>
+
+
+<!-- START BANNER -->
+<div class="row" style="height:390px;background-color:lightgrey;">
+	<div id="slides_control" class="col-md-9">
+		<div>
+			<carousel interval="myInterval">
+				<slide ng-repeat="carousel in appData.carousel" active="carousel.active">
+					<img ng-src="{{carousel.url}}">
+					<div class="carousel-caption">
+						<h4>{{carousel.description}}</h4>
+					</div>
+				</slide>
+			</carousel>
+		</div>
+	</div>
+<!-- END BANNER -->
+
+<!-- START SIDE SCROLL -->
+	<div class="scroll-text col-md-3" id='departments' style="text-align:center;">
+		<ul>
+			<li ng-repeat="department in appData.departments">
+			<a href="" style="display:block;padding-top:20px;">{{department.name}}</a>
+			<p>{{department.description}}</p>
+			</li>
+		</ul>
+	</div>
+
+
+</div>
+
+<div class="container body-content">
+	<div class="row">
+		<div class="col-md-4 action-row">
+			<h2 class="appointment">Make an Appointment</h2>
+			<div class="row grey-box">
+				<p class="first">
+					<span class="md-col-2 glyphicon glyphicon-earphone"></span> by phone: 
+					<span class="text-danger">011-2743 5600</span>
+				</p> 
+				<p>
+					<span class="md-col-2 glyphicon glyphicon-envelope"></span> by email: 
+					<a href="mailto:info@vinayakhospital.co.in" class="text-danger">info@vinayakhospital.co.in</a>
+				</p>
+			</div>
+			<a class="btn btn-danger" href="">Fill in the form</a>
+		</div>
+		<div class="col-md-4 medical-services-list">
+			<h2 class="service">Our Medical Services</h2>
+			<h4>Some of our services are:</h4>
+			<ul ng-repeat="service in appData.medical_services | limitTo:limitImg" style="margin:0;">
+				<li style="list-style:none;">{{service.name}}</li>
+			</ul>
+			<button type="button" class="btn btn-primary">View All Services</button>
+		</div>
+		<div class="col-md-4">
+			<h2>Meet our Doctors</h2>
+			<div id="slides_control" style="margin-bottom:40px;">
+				<div style="height:130px;">
+					<carousel interval="myInterval">
+						<slide ng-repeat="doctor in appData.doctors" active="doctor.active">
+							<img ng-src="{{doctor.img_url}}" style="height:100px;">
+							<span>
+								{{doctor.fname}} {{doctor.lname}}, {{doctor.qualification}}, {{doctor.department}}
+							</span>
+						</slide>
+					</carousel>
+				</div>
+			</div>
+			<!-- <div class="doctors-scroll" id="doctors">
+				<ul>
+					<li ng-repeat="doctor in appData.doctors">
+						<img ng-src="{{doctor.img_url}}" alt="" />
+						<p>{{doctor.fname}} {{doctor.lname}}, {{doctor.qualification}}, {{appData.departments[2].name}}</p>
+					</li>
+				</ul>
+			</div> -->
+			<button type="button" class="btn btn-info">More About Us</button>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-7 testimonial">
+		<h4><small class="testimonial-header">What our patients has to say</small></h4>
+			<div id="patient_testimonials" style="height:90px;overflow:hidden;">
+				<blockquote class="blockquote" ng-repeat="testimonial in appData.testimonials">
+					<p>{{testimonial.description}}</p>
+					<footer style="text-align:right;">{{testimonial.name}}, {{testimonial.status}}</footer>
+				</blockquote>
+			</div>
+		</div>
+
+		<!-- Office Bearers -->
+		<div class="col-md-5 office-bearers">
+			<h2>Our Office Bearers</h2>
+			<a class="buttons prev" href="#">&#60;</a>
+			<a class="buttons next" href="#">&#62;</a>
+			<div id="slider1">
+				<div id="office-bearers" style="width:443px;height:170px;overflow:hidden;">
+					<ul style="width:1500px;margin-top:-10px;">
+						<li ng-repeat="officeBearer in appData.office_bearers" style="display:inline-block;width:125px;margin:10px;">
+							<img ng-src="cake2.6/{{officeBearer.img_url}}" style="width:100%;height:100%;border:1px solid black" />
+							<p style="font-size:.8em;">{{officeBearer.fname}} {{officeBearer.lname}}<br>{{officeBearer.post}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- END Office Bearers -->
+	</div>
+</div>

@@ -1,0 +1,77 @@
+<html ng-app="myApp">
+<header>
+<!--	<script type="text/javascript" src="lib/angular.min.js"></script>-->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript">
+	var app = angular.module('myApp',[]);
+	app.controller('mainCtrl', ['dataService','$scope', function(dataService, $scope){
+		$scope.name = 'Ranajit';
+		var collection = 'trustees';
+
+		dataService.getAppData(collection)
+		.then(getDataSuccess, getDataError);
+
+		function getDataSuccess(data){
+			$scope.appDatas = data;
+			console.log($scope.appDatas[0].img_url);
+		}
+
+		function getDataError(errMsg){
+			console.log('Something went wrong while fetching application data: '+errMsg);
+		}
+	}]);
+
+	app.factory('dataService', ['$q', '$http',dataService]);
+
+	function dataService($q,$http){
+	return{
+		getAppData: getAppData
+	};
+	var collections=[];
+	function getAppData(collection){
+		
+		/*if(collection.length>1){
+			for(var i=0;i<collection.length;i++){
+				$http({
+					method:'GET',
+					url:'/'+collection[i],
+					headers:{
+
+					}
+				}).then(storeResponse)
+			}
+		}*/
+			return $http({
+				method:'GET',
+				url:'/'+collection,
+				headers:{
+
+				}
+			})
+			.then(respondAppData)
+			.catch(respondAppDataError);
+		}
+
+		function respondAppData(response){
+			return response.data;
+		}
+
+		function respondAppDataError(err){
+			return $q.reject("Error retrieving Departments. (HTTP Status: "+err.status+")");
+		}
+	}
+	</script>
+</header>
+<body ng-controller="mainCtrl">
+	<span>Howdy! {{name}}</span>
+	<div ng-repeat='appData in appDatas'>
+		<span>{{appData.fname}}</span>
+		<span>{{appData.lname}}</span>
+		<span>{{appData.post}}</span>
+		<img ng-src="{{appData.img_url}}">
+	</div>
+	<img src="image1.jpg">
+</body>
+
+
+<html>

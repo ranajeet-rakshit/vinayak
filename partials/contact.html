@@ -1,0 +1,54 @@
+<div >
+	<img src="vinayak/app/img/banner1.jpg" alt="" class="banner-wrapper">
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<h3>Contact Us</h3>
+		<form role="form" name="userform" novalidate>
+			<div class="form-group">
+				<label for="name">First Name:</label>
+				<input type="text" class="form-control" name="firstname" ng-model="user.firstname" ng-required="true" ng-minlength="2" placeholder="Enter your first name" />
+				<span class="error-message" ng-show="userform.firstname.$dirty && userform.firstname.$error.required">The First Name is mandatory.</span>
+				<span class="error-message" ng-show="userform.firstname.$dirty && userform.firstname.$error.minlength">The First Name should be minimum 2 charecters.</span>
+			</div>
+
+			<div class="form-group">
+				<label for="name">Last Name:</label>
+				<input type="text" class="form-control" name="lastname" ng-model="user.lastname" ng-required="true" ng-minlength="2" placeholder="Enter your last name" />
+				<span class="error-message" ng-show="userform.lastname.$dirty && userform.lastname.$error.required">The Last Name is mandatory.</span>
+				<span class="error-message" ng-show="userform.lastname.$dirty && userform.lastname.$error.minlength">The Last Name should be minimum 2 charecters.</span>
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" name="email" ng-model="user.email" ng-required="true" placeholder="Enter your email id" />
+				<span class="error-message" ng-show="userform.email.$dirty && userform.email.$error.required">
+				Email id is required.</span>
+				<span class="error-message" ng-show="userform.email.$dirty && userform.email.$error.email">Invalid Email address.</span>
+			</div>
+
+			<div class="form-group">
+				<label for="address">Address:</label>
+				<input type="text" class="form-control" name="address" ng-model="user.address" ng-required="true" ng-minlength="20" placeholder="Enter your address" />
+				<span class="error-message" ng-show="userform.address.$dirty && userform.address.$error.required">
+				Address is required.</span>
+				<span class="error-message" ng-show="userform.address.$dirty && userform.address.$error.minlength">Address should be 20 charecters long.</span>
+			</div>
+
+			<div class="form-group">
+				<label for="message">Message:</label>
+				<textarea style="height:100px;" type="text" class="form-control" name="message" ng-model="user.message" ng-required="true" ng-minlength="50" placeholder="Enter your message" />
+				<span class="error-message" ng-show="userform.message.$dirty && userform.message.$error.required">Message is required.</span>
+				<span class="error-message" ng-show="userform.message.$dirty && userform.message.$error.minlength">Message should be atleast 50 charecters long.</span>
+			</div>
+
+			<button class="btn btn-primary" type="submit" ng-click="showInput()">Submit</button>
+			<button class="btn btn-danger" ng-click="clearUser()">Clear all Fields</button>
+		</form>
+	</div>
+
+	<div class="col-md-6">
+		<iframe width="100%" height="550" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=vinayak+hospital+Derawal+Nagar+New+Delhi&amp;aq=&amp;sll=28.710839,77.189169&amp;sspn=0.042005,0.055189&amp;ie=UTF8&amp;hq=vinayak+hospital&amp;hnear=Derawal+Nagar,+New+Delhi,+Delhi&amp;t=m&amp;ll=28.698421,77.187015&amp;spn=0.006295,0.006295&amp;output=embed"></iframe>
+	</div>
+</div>

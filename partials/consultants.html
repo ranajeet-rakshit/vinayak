@@ -1,0 +1,16 @@
+<h1>Consultants</h1>
+
+<table class="table table-responsive table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Department</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="consultant in appData.consultants">
+			<td>{{consultant.name}}</td>
+			<td>{{consultant.department}}</td>
+		</tr>
+	</tbody>
+</table>

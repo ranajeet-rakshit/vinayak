@@ -1,0 +1,97 @@
+<h1>OPD Schedules</h1>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadOPDModal">Add Consultant</button>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Days</th>
+			<th>Time From</th>
+			<th>Time To</th>
+			<th>Department</th>
+			<th>Doctor</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="opd in opds">
+			<td>{{opd.id}}</td>
+			<td>{{opd.days}}</td>
+			<td>{{opd.time_from}}</td>
+			<td>{{opd.time_to}}</td>
+			<td>{{opd.department}}</td>
+			<td>{{opd.doctor}}</td>
+			<td>
+				<button type="button" class="btn-xs btn-primary" ng-click="editOpd(opd);" data-toggle="modal" data-target="#editOPDModal">Edit</button>
+				<button type="button" class="btn-xs btn-danger" ng-click="showConfirm($event, opd);">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<div id="uploadOPDModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal' ng-click="opdTimeFrom=undefined;opdTimeTo=undefined">&times;</button>
+				<h4 class="modal-title">Add Consultant</h4>
+			</div>
+
+			<div class="modal-body">
+				<md-input-container flex>
+					<label>Name</label>
+					<input ng-model="consultantName">
+				</md-input-container>
+				
+				<md-input-container flex>
+				Department:
+					<select ng-model="consultantDepartment">
+						<option ng-repeat="department in departments" value="{{department.id}}">
+						{{department.name}}
+						</option>
+					</select>
+				</md-input-container>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-disabled="consultantName==undefined||consultantDepartment==undefined" ng-click="addConsultant();">Submit
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="editOPDModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal' ng-click="consultantName=undefined;consultantDepartment=undefined">&times;</button>
+				<h4 class="modal-title">Edit Consultant</h4>
+			</div>
+
+			<div class="modal-body">
+				<md-input-container flex>
+					<label>Name</label>
+					<input ng-model="oldConsultantName">
+				</md-input-container>
+				
+				<md-input-container flex>
+				Department:
+					<select ng-model="oldConsultantDepartment">
+						<option ng-repeat="department in departments" value="{{department.id}}">
+						{{department.name}}
+						</option>
+					</select>
+				</md-input-container>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-disabled="oldConsultantName==undefined||oldConsultantDepartment==undefined" ng-click="updateConsultants();">Submit
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

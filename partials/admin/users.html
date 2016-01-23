@@ -1,0 +1,100 @@
+<h1>Users</h1>
+<button type="button" class="btn btn-primary" data-toggle='modal' data-target='#addModal'>Add User</button>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Username</th>
+			<th>Role</th>
+			<th>Created</th>
+			<th>Modified</th>
+			<th>Last Login</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in appData.admins">
+			<td>{{user.id}}</td>
+			<td>{{user.username}}</td>
+			<td>{{user.role}}</td>
+			<td>{{user.created}}</td>
+			<td>{{user.modified}}</td>
+			<td>{{user.last_login}}</td>
+			<td><button ng-click="editUser(user)" class="btn-xs btn-primary" data-toggle='modal' data-target='#editModal'>Edit</button> / <button class="btn-xs btn-danger" ng-click="showConfirm($event, user)">Delete</button></td>
+			<!-- user.username = 'bhool bhal' -->
+		</tr>
+	</tbody>
+</table>
+
+<!-- EDIT USER MODAL START -->
+<div id="editModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal'>&times;</button>
+				<h4 class="modal-title">Edit User</h4>
+			</div>
+
+			<div class="modal-body">
+				<input ng-model='userName' type="text" placeholder="User Name">
+				<select ng-model='role'>
+					<option value="">Select Role</option>}
+					<option value="admin">Admin</option>
+					<option value="super_admin">Super Admin</option>
+				</select>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-click="assignUser();" ng-disabled="userName==undefined || role==undefined">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- EDIT USER MODAL END -->
+
+<!-- ADD USER MODAL START -->
+<div id="addModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss='modal'>&times;</button>
+				<h4 class="modal-title">Add User</h4>
+			</div>
+
+			<div class="modal-body">
+			<table class="addData">
+				<tbody>
+					<tr>
+						<td>User Name:</td>
+						<td><input ng-model='addUserName' type="text" placeholder="User Name"></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" ng-model='password' placeholder='Enter password'></td>
+					</tr>
+					<tr>
+						<td>Re-enter Password:</td>
+						<td><input type="password" ng-model='rePassword' placeholder='Re-Enter password'></td>
+					</tr>
+					<tr>
+						<td>Select User Role</td>
+						<td>
+							<select ng-model='addRole'>
+								<option value="">Select Role</option>}
+								<option value="admin">Admin</option>
+								<option value="super_admin">Super Admin</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss='modal' ng-click="addUser();" ng-disabled="addUserName==undefined || addRole==undefined || password==undefined || rePassword==undefined || password!=rePassword">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ADD USER MODAL END -->
